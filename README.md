@@ -11,4 +11,4 @@ The LR04 benthic stack contains benthic &#948;<sup>18</sup>O measurements from m
 [mis.txt](https://github.com/robynfsj/lr04/blob/master/data/mis.txt) – ages of marine isotope stage (MIS) boundaries  
   
 ## References
-Lisiecki, L. E. & Raymo, M. E. (2005) *A Pliocene-Pleistocene stack of 57 globally distributed benthic d18O records*. Paleoceanography, 20, PA1003, doi:10.1029/2004PA001071.
+Lisiecki, L. E. & Raymo, M. E. (2005) *A Pliocene-Pleistocene stack of 57 globally distributed benthic d18O records*. Paleoceanography, 20, PA1003, doi:10.1029/2004PA001071. Available online: http://lorraine-lisiecki.com/stack.html [Downloaded 2019-06-28].
