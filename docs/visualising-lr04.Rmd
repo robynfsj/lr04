@@ -31,7 +31,7 @@ Data:
 
 ```{r}
 library(ggplot2)
-lr04 <- read.delim("./data/lr04.txt")
+lr04 <- read.delim("../data/lr04.txt")
 ```
 
 
