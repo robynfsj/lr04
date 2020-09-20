@@ -121,10 +121,70 @@ ggplot(data=lr04_7to9,
 
 
 
+# Plot vertically ---------------------------------------------------------
+
+# These types of plots are often displayed vertically so I'll have a go at 
+# flipping them around. The following block of code needs to be added to the 
+# plots:
+#   scale_y_reverse(position="right")+  
+#   scale_x_reverse()+
+#   coord_flip()+ 
+
+# All data
+ggplot(data=lr04, aes(x=time, y=d18o))+
+  geom_line(colour="#00AFBB", size=0.5)+
+  labs(title="LR04 Benthic Stack",
+       x="Time (Ma)", 
+       y=expression(δ^{18}*O~"(‰)"),                 
+       caption="Data from Lisiecki & Raymo (2005)")+ 
+  scale_y_reverse(position="right")+  
+  scale_x_reverse()+
+  coord_flip()+  
+  theme_classic(base_size=10)
+
+# Last 500 ka
+ggplot(data=lr04_500, 
+       aes(x=time, y=d18o, colour=d18o))+ 
+  geom_line(size = 0.8)+ 
+  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
+  labs(title="LR04 Benthic Stack (Last 500 ka)",
+       x="Age (ka)", 
+       y=expression(δ^{18}*O~"(‰)"),                
+       caption="Data from Lisiecki & Raymo (2005)")+
+  annotate("text", 
+           x = c(5, 125, 205, 237, 327, 410), 
+           y = c(3, 3, 3.3,3.3, 3, 3), 
+           label = c("1", "5", "7 a-c", "7e", "9", "11"))+
+  scale_y_reverse(position="right")+  
+  scale_x_reverse()+
+  coord_flip()+  
+  theme_classic(base_size=10)+
+  theme(legend.position="none")
+
+# MIS 7-9
+ggplot(data=lr04_7to9, aes(x=time, y=d18o, colour=d18o))+ 
+  geom_line(size = 0.8)+ 
+  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
+  labs(title="LR04 Benthic Stack (MIS 7–9)",
+       x="Age (ka)", 
+       y=expression(δ^{18}*O~"(‰)"),                
+       caption="Data from Lisiecki & Raymo (2005)")+ 
+  annotate("text", 
+           x = c(160, 200, 225, 237, 260, 283, 297, 310, 320, 327, 360), 
+           y = c(4.9, 3.4, 4.5, 3.3, 4.7, 3.75, 4.4, 3.6, 3.95, 3.1, 4.9), 
+           label = c("6", "7 a-c", "7d", "7e", "8", "9a", "9b", "9c?", "9d?", 
+                     "9e", "10"))+
+  scale_y_reverse(position="right")+  
+  scale_x_reverse()+
+  coord_flip()+                             
+  theme_classic(base_size=10)+
+  theme(legend.position="none")
+
+
+
 # To Do -------------------------------------------------------------------
 
 # - change frequency of axis ticks
 # - see if it is possible to alter where the blue changes to red on the gradient
 # - move plot title to centre
 # - investigate how to export plots to pdf with special characters preserved
-
