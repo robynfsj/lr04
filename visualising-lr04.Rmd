@@ -3,6 +3,11 @@ title: "Visualising the LR04 Benthic Stack"
 author: "Robyn Seymour-Jones"
 date: "20/09/2020"
 output: html_document
+knit: (function(input_file, encoding) {
+  out_dir <- 'docs';
+  rmarkdown::render(input_file,
+  encoding=encoding,
+  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
 ```{r setup, include=FALSE}
@@ -31,7 +36,7 @@ Data:
 
 ```{r}
 library(ggplot2)
-lr04 <- read.delim("../data/lr04.txt")
+lr04 <- read.delim("./data/lr04.txt")
 ```
 
 
