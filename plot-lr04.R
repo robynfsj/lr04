@@ -21,8 +21,8 @@ ggplot(data=lr04, aes(x=time, y=d18o))+               # set up plot
        x="Time (ka)", 
        y=expression(δ^{18}*O~"(‰)"),
        caption="Data from Lisiecki & Raymo (2005)")+ 
-       scale_y_reverse()+                             # reverse scale on y-axis
-       theme_classic()                                # set ggplot theme
+  scale_y_reverse()+                             # reverse scale on y-axis
+  theme_classic()                                # set ggplot theme
 
 # NOTES
 # —————
@@ -43,13 +43,13 @@ ggplot(data=lr04, aes(x=time, y=d18o))+               # set up plot
 lr04$time <- lr04$time/1000 # convert time from ka to ma
 
 ggplot(data=lr04, aes(x=time, y=d18o))+
-  geom_line(colour = "#00AFBB", size = 0.3)+
+  geom_line(colour="#00AFBB", size=0.5)+
   labs(title="LR04 Benthic Stack",
        x="Time (Ma)", 
        y=expression(δ^{18}*O~"(‰)"),                 
        caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse()+                                 # reverse scale on y-axis
-  theme_classic()      
+  scale_y_reverse()+ 
+  theme_classic(base_size=15)
 
 # NOTES
 # —————
@@ -70,17 +70,8 @@ ggplot(data=lr04, aes(x=time, y=d18o, colour=d18o))+
        y=expression(δ^{18}*O~"(‰)"),                
        caption="Data from Lisiecki & Raymo (2005)")+ 
   scale_y_reverse()+                                 
-  theme_classic()+
+  theme_classic(base_size=15)+
   theme(legend.position = "none")
-
-
-# TO DO
-# —————
-# - change marks on x-axis to every million years
-# - see if it is possible to alter where the blue changes to red on the gradient
-# - move plot title to centre
-# - add annotations to plot, e.g. MPT, box around MIS 7-9?
-# - zoom in on MIS 7 to 9
 
 
 
@@ -119,6 +110,21 @@ ggplot(data=lr04_7to9,
        x="Age (ka)", 
        y=expression(δ^{18}*O~"(‰)"),                
        caption="Data from Lisiecki & Raymo (2005)")+ 
+  annotate("text", 
+           x = c(160, 200, 225, 237, 260, 283, 297, 310, 320, 327, 360), 
+           y = c(4.9, 3.4, 4.5, 3.3, 4.7, 3.75, 4.4, 3.6, 3.95, 3.1, 4.9), 
+           label = c("6", "7 a-c", "7d", "7e", "8", "9a", "9b", "9c?", "9d?", 
+                     "9e", "10"))+
   scale_y_reverse()+                                 
-  theme_classic()+
+  theme_classic(base_size=15)+
   theme(legend.position="none")
+
+
+
+# To Do -------------------------------------------------------------------
+
+# - change frequency of axis ticks
+# - see if it is possible to alter where the blue changes to red on the gradient
+# - move plot title to centre
+# - investigate how to export plots to pdf with special characters preserved
+
