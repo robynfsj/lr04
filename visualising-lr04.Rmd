@@ -6,13 +6,14 @@ output: html_document
 knit: (function(input_file, encoding) {
   out_dir <- 'docs';
   rmarkdown::render(input_file,
-  encoding=encoding,
-  output_file=file.path(dirname(input_file), out_dir, 'index.html'))})
+  encoding = encoding,
+  output_file = file.path(dirname(input_file), out_dir, 'index.html'))})
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE,
-                      fig.width=12, fig.height=6) 
+                      fig.width = 12, 
+                      fig.height = 6) 
 ```
 
 
@@ -62,14 +63,14 @@ The data have been loaded correctly. The variables are:
 First of all I just want to plot up the data as it is so I can have a look and see what I want to do with it.
 
 ```{r}
-ggplot(data=lr04, aes(x=time, y=d18o))+               # set up plot
-  geom_line(colour = "#00AFBB", size = 0.5)+          # plot line
-  labs(title="LR04 Benthic Stack",                    # plot labels 
-       x="Time (ka)", 
-       y=expression(δ^{18}*O~"(‰)"),
-       caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse()+                             # reverse scale on y-axis
-  theme_classic(base_size=15)
+ggplot(data = lr04, aes(x = time, y = d18o)) +        # set up plot
+  geom_line(colour = "#00AFBB", size = 0.5) +         # plot line
+  labs(title = "LR04 Benthic Stack",                    # plot labels 
+       x = "Time (ka)", 
+       y = expression(δ^{18}*O~"(‰)"),
+       caption = "Data from Lisiecki & Raymo (2005)") + 
+  scale_y_reverse() +                                 # reverse scale on y-axis
+  theme_classic(base_size = 15)
 ```
 
 #### Some notes on what I've done:
@@ -88,39 +89,39 @@ I choose the classic theme as I think it is the nicest and the cleanest. [There 
 It would be easier to understand the plot if the x-axis time scale was in millions rather than thousands of years. This following line of code will do that.
 
 ```{r}
-lr04$time <- lr04$time/1000
+lr04$time <- lr04$time / 1000
 ```
 
 Now I can plot it up as I did before.
 
 ```{r}
-ggplot(data=lr04, aes(x=time, y=d18o))+
-  geom_line(colour = "#00AFBB", size = 0.5)+
-  labs(title="LR04 Benthic Stack",
-       x="Time (Ma)", 
-       y=expression(δ^{18}*O~"(‰)"),                 
-       caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse()+
-  scale_x_continuous(breaks=seq(0, 6, by=1))+     # change tick frequency
-  theme_classic(base_size=15) 
+ggplot(data = lr04, aes(x = time, y = d18o)) +
+  geom_line(colour = "#00AFBB", size = 0.5) +
+  labs(title = "LR04 Benthic Stack",
+       x = "Time (Ma)", 
+       y = expression(δ^{18}*O~"(‰)"),                 
+       caption = "Data from Lisiecki & Raymo (2005)") + 
+  scale_y_reverse() +
+  scale_x_continuous(breaks = seq(0, 6, by = 1)) +     # change tick frequency
+  theme_classic(base_size = 15) 
 ```
 
-As well as converting the time scale to millions of years, I have changed the tick frequency so that there is one everyone million years using `scale_x_continuous(breaks=seq(0, 6, by=1))`. They were places similarly to the ka plot with a tick at 2 Ma and 4 Ma before I made this change.  
+As well as converting the time scale to millions of years, I have changed the tick frequency so that there is one everyone million years using `scale_x_continuous(breaks = seq(0, 6, by = 1))`. They were places similarly to the ka plot with a tick at 2 Ma and 4 Ma before I made this change.  
 &nbsp;  
   
 It would be nice to plot the line colour as a gradient so cooler conditions are represented by a cold colour and warmer conditions represented by a warm colour.
 
 ```{r}
-ggplot(data=lr04, aes(x=time, y=d18o, colour=d18o))+ 
-  geom_line(size = 0.5)+ 
-  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
-  labs(title="LR04 Benthic Stack",                   
-       x="Time (Ma)", 
-       y=expression(δ^{18}*O~"(‰)"),                
-       caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse()+
-  scale_x_continuous(breaks = seq(0, 6, by = 1))+
-  theme_classic(base_size=15)+
+ggplot(data = lr04, aes(x = time, y = d18o, colour = d18o)) + 
+  geom_line(size = 0.5) + 
+  scale_colour_gradient(low = "#DB5824", high = "#1A5A95") +
+  labs(title = "LR04 Benthic Stack",                   
+       x = "Time (Ma)", 
+       y = expression(δ^{18}*O~"(‰)"),                
+       caption = "Data from Lisiecki & Raymo (2005)") + 
+  scale_y_reverse() +
+  scale_x_continuous(breaks = seq(0, 6, by = 1)) +
+  theme_classic(base_size = 15) +
   theme(legend.position = "none")
 ```
 
@@ -133,28 +134,28 @@ Zooming in on part of the data just requires subsetting it to the section of it 
 
 ```{r}
 # subset last 500 ka
-lr04_500 <- subset(lr04, time<0.5)
+lr04_500 <- subset(lr04, time < 0.5)
 
 # convert time from back from ma to ka
 lr04_500$time <- lr04_500$time * 1000
 ```
 
 ```{r}
-ggplot(data=lr04_500, 
-       aes(x=time, y=d18o, colour=d18o))+ 
-  geom_line(size = 0.5)+ 
-  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
-  labs(title="LR04 Benthic Stack (Last 500 ka)",
-       x="Age (ka)", 
-       y=expression(δ^{18}*O~"(‰)"),                
-       caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse()+                                 
+ggplot(data = lr04_500, 
+       aes(x = time, y = d18o, colour = d18o)) + 
+  geom_line(size = 0.5) + 
+  scale_colour_gradient(low = "#DB5824", high = "#1A5A95") +
+  labs(title = "LR04 Benthic Stack (Last 500 ka)",
+       x = "Age (ka)", 
+       y = expression(δ^{18}*O~"(‰)"),                
+       caption = "Data from Lisiecki & Raymo (2005)") + 
+  scale_y_reverse() +                                 
   annotate("text", 
            x = c(5, 125, 205, 237, 327, 410), 
            y = c(3, 3, 3.3,3.3, 3, 3), 
-           label = c("1", "5", "7 a-c", "7e", "9", "11"))+
-  theme_classic(base_size=15)+
-  theme(legend.position="none")
+           label = c("1", "5", "7 a-c", "7e", "9", "11")) +
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
 
 
@@ -165,27 +166,27 @@ In this example I have focused in on the section of the record that corresponds 
 
 ```{r}
 # subset MIS 7–9 
-lr04_7to9 <- subset(lr04_500, time>130 & time<374) 
+lr04_7to9 <- subset(lr04_500, time > 130 & time < 374) 
 ```
 
 ```{r}
-ggplot(data=lr04_7to9, 
-       aes(x=time, y=d18o, colour=d18o))+ 
-  geom_line(size = 0.8)+ 
-  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
-  labs(title="LR04 Benthic Stack (MIS 7–9)",
-       x="Age (ka)", 
-       y=expression(δ^{18}*O~"(‰)"),                
-       caption="Data from Lisiecki & Raymo (2005)")+ 
+ggplot(data = lr04_7to9, 
+       aes(x = time, y = d18o, colour = d18o)) + 
+  geom_line(size = 0.8) + 
+  scale_colour_gradient(low = "#DB5824", high = "#1A5A95") +
+  labs(title = "LR04 Benthic Stack (MIS 7–9)",
+       x = "Age (ka)", 
+       y = expression(δ^{18}*O~"(‰)"),                
+       caption = "Data from Lisiecki & Raymo (2005)") + 
   annotate("text", 
-           x=c(160, 200, 225, 237, 260, 283, 297, 310, 320, 327, 360), 
-           y=c(4.9, 3.4, 4.5, 3.3, 4.7, 3.75, 4.4, 3.6, 3.95, 3.1, 4.9), 
+           x = c(160, 200, 225, 237, 260, 283, 297, 310, 320, 327, 360), 
+           y = c(4.9, 3.4, 4.5, 3.3, 4.7, 3.75, 4.4, 3.6, 3.95, 3.1, 4.9), 
            label = c("6", "7 a-c", "7d", "7e", "8", "9a", "9b", "9c?", "9d?", 
-                     "9e", "10"))+
-  scale_y_reverse()+    
-  scale_x_continuous(breaks=seq(120, 380, by=20))+
-  theme_classic(base_size=15)+
-  theme(legend.position="none")
+                     "9e", "10")) +
+  scale_y_reverse() +    
+  scale_x_continuous(breaks=seq(120, 380, by = 20)) +
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
 
 
@@ -193,67 +194,67 @@ ggplot(data=lr04_7to9,
 ### 4.5 Vertical plots
 
 These data are often plotted vertically. All it takes is this small section of code to flip the axes around:
-`scale_y_reverse(position="right") + scale_x_reverse() + coord_flip()`  
+`scale_y_reverse(position = "right") + scale_x_reverse() + coord_flip()`  
 
 #### All data
 
-```{r fig.width=4, fig.height=8, fig.align="center"}
-ggplot(data=lr04, aes(x=time, y=d18o))+
-  geom_line(colour="#00AFBB", size=0.5)+
-  labs(title="LR04 Benthic Stack",
-       x="Time (Ma)", 
-       y=expression(δ^{18}*O~"(‰)"),                 
-       caption="Data from Lisiecki & Raymo (2005)")+ 
-  scale_y_reverse(position="right")+  
-  scale_x_reverse(breaks=seq(0, 6, by=1))+
-  coord_flip()+  
-  theme_classic(base_size=15)
+```{r fig.width = 4, fig.height = 8, fig.align = "center"}
+ggplot(data = lr04, aes(x = time, y = d18o)) +
+  geom_line(colour = "#00AFBB", size = 0.5) +
+  labs(title = "LR04 Benthic Stack",
+       x = "Time (Ma)", 
+       y = expression(δ^{18}*O~"(‰)"),                 
+       caption = "Data from Lisiecki & Raymo (2005)") + 
+  scale_y_reverse(position = "right") +  
+  scale_x_reverse(breaks = seq(0, 6, by = 1)) +
+  coord_flip() +  
+  theme_classic(base_size = 15)
 ```
 
 
 #### Last 500 ka
 
-```{r fig.width=4, fig.height=8, fig.align="center"}
-ggplot(data=lr04_500, 
-       aes(x=time, y=d18o, colour=d18o))+ 
+```{r fig.width = 4, fig.height = 8, fig.align = "center"}
+ggplot(data = lr04_500, 
+       aes(x = time, y = d18o, colour = d18o)) + 
   geom_line(size = 0.5)+ 
-  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
-  labs(title="LR04 Benthic Stack (Last 500 ka)",
-       x="Age (ka)", 
-       y=expression(δ^{18}*O~"(‰)"),                
-       caption="Data from Lisiecki & Raymo (2005)")+
+  scale_colour_gradient(low = "#DB5824", high = "#1A5A95") +
+  labs(title = "LR04 Benthic Stack (Last 500 ka)",
+       x = "Age (ka)", 
+       y = expression(δ^{18}*O~"(‰)"),                
+       caption = "Data from Lisiecki & Raymo (2005)") +
   annotate("text", 
            x = c(5, 125, 205, 237, 327, 410), 
            y = c(3, 3, 3.3,3.3, 3, 3), 
-           label = c("1", "5", "7 a-c", "7e", "9", "11"))+
-  scale_y_reverse(position="right")+  
-  scale_x_reverse()+
-  coord_flip()+  
-  theme_classic(base_size=15)+
-  theme(legend.position="none")
+           label = c("1", "5", "7 a-c", "7e", "9", "11")) +
+  scale_y_reverse(position = "right") +  
+  scale_x_reverse() +
+  coord_flip() +  
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
 
 
 #### MIS 7-9
 
-```{r fig.width=4, fig.height=8, fig.align="center"}
-ggplot(data=lr04_7to9, aes(x=time, y=d18o, colour=d18o))+ 
-  geom_line(size = 0.8)+ 
-  scale_colour_gradient(low="#DB5824", high="#1A5A95")+
-  labs(title="LR04 Benthic Stack (MIS 7–9)",
-       x="Age (ka)", 
-       y=expression(δ^{18}*O~"(‰)"),                
-       caption="Data from Lisiecki & Raymo (2005)")+ 
+```{r fig.width = 4, fig.height = 8, fig.align = "center"}
+ggplot(data = lr04_7to9, aes(x = time, y = d18o, colour = d18o)) + 
+  geom_line(size = 0.8) + 
+  scale_colour_gradient(low = "#DB5824", high = "#1A5A95") +
+  labs(title = "LR04 Benthic Stack (MIS 7–9)",
+       x = "Age (ka)", 
+       y = expression(δ^{18}*O~"(‰)"),                
+       caption = "Data from Lisiecki & Raymo (2005)") + 
   annotate("text", 
            x = c(160, 200, 225, 237, 260, 283, 297, 310, 320, 327, 360), 
            y = c(4.9, 3.4, 4.5, 3.3, 4.7, 3.75, 4.4, 3.6, 3.95, 3.1, 4.9), 
            label = c("6", "7 a-c", "7d", "7e", "8", "9a", "9b", "9c?", "9d?", 
-                     "9e", "10"))+
-  scale_y_reverse(position="right")+  
-  scale_x_reverse(breaks=seq(120, 380, by=20))+
-  coord_flip()+                             
-  theme_classic(base_size=15)+
-  theme(legend.position="none")
+                     "9e", "10")) +
+  scale_y_reverse(position = "right") +  
+  scale_x_reverse(breaks = seq(120, 380, by = 20)) +
+  coord_flip() +                             
+  theme_classic(base_size = 15) +
+  theme(legend.position = "none")
 ```
 
 
