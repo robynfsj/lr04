@@ -5,6 +5,8 @@ This repository was created to practice using R again. In particular I wanted to
   
 ## The LR04 Benthic Stack
 The LR04 benthic stack contains benthic &#948;<sup>18</sup>O measurements from marine sediment cores obtained from 57 different sites. The record spans 5.3 million years and represents a combination of global ice volume and deep-water temperature signals through time. High &#948;<sup>18</sup>O measurements reflect larger global ice volumes that are indicative of cold glacial periods while lower &#948;<sup>18</sup>O measurements reflect lower global ice volumes that are indicative of warmer interglacial periods.  
+
+![LR04 MIS 7–9](https://raw.githubusercontent.com/robynfsj/lr04/master/plots/mis-7-to-9.jpeg)
   
 ## Contents
 [Visualising the LR04 Benthic Stack](https://robynfsj.github.io/lr04/) - HTML render of R Markdown document   
