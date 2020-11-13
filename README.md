@@ -9,7 +9,7 @@ The LR04 benthic stack contains benthic &#948;<sup>18</sup>O measurements from m
   
 ## Contents
 [Visualising the LR04 Benthic Stack](https://robynfsj.github.io/lr04/) - HTML render of R Markdown document   
-[plot-lr04.R](https://github.com/robynfsj/lr04/blob/master/plot-lr04.R) – main R script  
+[plot-lr04.R](https://github.com/robynfsj/lr04/blob/master/scripts/plot-lr04.R) – main R script  
 [lr04.txt](https://github.com/robynfsj/lr04/blob/master/data/lr04.txt) – benthic stack data  
 [mis.txt](https://github.com/robynfsj/lr04/blob/master/data/mis.txt) – ages of marine isotope stage (MIS) boundaries  
   
